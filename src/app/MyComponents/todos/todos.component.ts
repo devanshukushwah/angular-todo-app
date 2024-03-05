@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Todo } from '../../Model/Todo';
 import { CommonModule } from '@angular/common';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
+import { AddTodoComponent } from '../add-todo/add-todo.component';
 
 @Component({
   selector: 'app-todos',
   standalone: true,
-  imports: [CommonModule, TodoItemComponent],
+  imports: [CommonModule, TodoItemComponent, AddTodoComponent],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
 })
@@ -45,5 +46,10 @@ export class TodosComponent {
   handleTodoDelete(todo: Todo) {
     // console.log(todo);
     this.todos = this.todos.filter((f) => f.sno !== todo.sno);
+  }
+
+  addTodo(todo: Todo) {
+    const tempTodo = { ...todo, sno: this.todos.length + 1 };
+    this.todos.push(tempTodo);
   }
 }
